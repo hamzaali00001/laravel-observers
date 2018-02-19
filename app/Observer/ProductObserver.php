@@ -6,16 +6,14 @@ use App\Product;
 
 class ProductObserver
 {
-    public function creating()
+    public function creating(Product $product)
     {
-        Product::creating(function ($model) {
-            $tax = .20;
+        $tax = .20;
 
-            if ($model->quantity < 10) {
-                $model->price += $model->price * $tax;
-            } else if ($model->quantity >= 10) {
-                $model->price += $model->price * ($tax / 2);
-            }
-        });
+        if ($product->quantity < 10) {
+            $product->price += $product->price * $tax;
+        } else if ($product->quantity >= 10) {
+            $product->price += $product->price * ($tax / 2);
+        }
     }
 }
